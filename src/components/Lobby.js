@@ -19,7 +19,7 @@ const Lobby = ({ joinRoom }) => {
                 e.preventDefault();
                 joinRoom(user, email, room);
             }}>
-            <h2>Cook a meal</h2>
+            <h2>Chat with Ghosa</h2>
             <div className="form-input">
                 <label>Username</label>
                 <input type="text"
