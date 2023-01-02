@@ -88,7 +88,7 @@ a.navbar-brand img {
 
 .screen .form-input button {
     padding: 10px 20px;
-    background: #111;
+    background: linear-gradient(90.21deg,#aa367c -5.91%,#4a2fbd 111.58%);
     color: #eee;
     font-size: 16px;
     cursor: pointer;

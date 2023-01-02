@@ -5,6 +5,7 @@ import logo from '../assets/img/logoblack.png';
 const Lobby = ({ joinRoom }) => {
     const [user, setUser] = useState();
     const [email, setEmail] = useState();
+    const [buttonText, setButtonText] = useState('Join');
     const [room, setRoom] = useState(null);
 
 
@@ -17,7 +18,9 @@ const Lobby = ({ joinRoom }) => {
         <form className="form"
             onSubmit={e => {
                 e.preventDefault();
+                setButtonText("Connecting...");
                 joinRoom(user, email, room);
+                setButtonText("Join");
             }}>
             <h2>Chat with Ghosa</h2>
             <div className="form-input">
@@ -34,7 +37,7 @@ const Lobby = ({ joinRoom }) => {
                     onChange={e => setEmail(e.target.value)} required />
             </div>
             <div className="form-input">
-                <button id="join-user" type="Submit" disabled={!user}>Join</button>
+                <button id="join-user" type="Submit" disabled={!user}>{buttonText}</button>
             </div>
         </form>
     </div>
