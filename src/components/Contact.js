@@ -26,7 +26,7 @@ export const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonText("Sending...");
-    let response = await fetch("https://fdbt.azurewebsites.net/api/v1/Message", {
+    let response = await fetch("https://blackfdapi.azurewebsites.net/api/v1/Message", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
