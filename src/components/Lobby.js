@@ -20,7 +20,6 @@ const Lobby = ({ joinRoom }) => {
                 e.preventDefault();
                 setButtonText("Connecting...");
                 joinRoom(user, email, room);
-                setButtonText("Join");
             }}>
             <h2>Chat with Ghosa</h2>
             <div className="form-input">
