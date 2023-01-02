@@ -18,7 +18,6 @@ const Lobby = ({ joinRoom }) => {
         <form className="form"
             onSubmit={e => {
                 e.preventDefault();
-                setButtonText("Connecting...");
                 joinRoom(user, email, room);
             }}>
             <h2>Chat with Ghosa</h2>
@@ -36,7 +35,7 @@ const Lobby = ({ joinRoom }) => {
                     onChange={e => setEmail(e.target.value)} required />
             </div>
             <div className="form-input">
-                <button id="join-user" type="Submit" disabled={!user}>{buttonText}</button>
+                <button id="join-user" type="Submit" onClick={e => {setButtonText("Connecting...");}} disabled={!user}>{buttonText}</button>
             </div>
         </form>
     </div>
