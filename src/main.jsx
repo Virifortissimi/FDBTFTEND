@@ -101,7 +101,10 @@ function App() {
       }
 
       setForm(initialForm);
-      setSubmitState({ status: 'success', message: 'Application received. We will review it and follow up by email.' });
+      setSubmitState({
+        status: 'success',
+        message: payload?.data?.message || 'Application received. We will review it and follow up by email.'
+      });
     } catch {
       setSubmitState({ status: 'error', message: 'The beta API is not reachable right now. Please try again shortly.' });
     }
