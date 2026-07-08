@@ -52,8 +52,13 @@ describe('AuthService', () => {
 
     const publicKey = await promise;
 
-    expect(publicKey).toEqual(validPublicKey);
-    expect(JSON.parse(localStorage.getItem(publicKeyCacheKey) || '{}')).toEqual(validPublicKey);
+    expect(publicKey).toEqual({
+      ...validPublicKey,
+      issuedAtUtc: new Date(0).toISOString(),
+      signatureAlgorithm: null,
+      signature: null
+    });
+    expect(JSON.parse(localStorage.getItem(publicKeyCacheKey) || '{}')).toEqual(publicKey);
   });
 
   it('should reuse persisted auth public key while it is valid', async () => {
@@ -61,7 +66,12 @@ describe('AuthService', () => {
 
     const publicKey = await (service as any).getAuthPublicKey();
 
-    expect(publicKey).toEqual(validPublicKey);
+    expect(publicKey).toEqual({
+      ...validPublicKey,
+      issuedAtUtc: new Date(0).toISOString(),
+      signatureAlgorithm: null,
+      signature: null
+    });
     httpMock.expectNone(`${environment.apiUrl}/auth/public-key?platform=web`);
   });
 
@@ -75,6 +85,12 @@ describe('AuthService', () => {
 
     await promise;
 
-    expect(JSON.parse(localStorage.getItem(publicKeyCacheKey) || '{}')).toEqual(validPublicKey);
+    const publicKey = JSON.parse(localStorage.getItem(publicKeyCacheKey) || '{}');
+    expect(publicKey).toEqual({
+      ...validPublicKey,
+      issuedAtUtc: new Date(0).toISOString(),
+      signatureAlgorithm: null,
+      signature: null
+    });
   });
 });

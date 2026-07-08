@@ -621,7 +621,7 @@ export class AuthService {
       algorithm: String(value?.algorithm || '').trim(),
       platform: String(value?.platform || AuthService.AUTH_PUBLIC_KEY_PLATFORM).trim().toLowerCase(),
       publicKeySpkiBase64: String(value?.publicKeySpkiBase64 || '').trim(),
-      issuedAtUtc: String(value?.issuedAtUtc || '').trim(),
+      issuedAtUtc: String(value?.issuedAtUtc || new Date(0).toISOString()).trim(),
       expiresAtUtc: String(value?.expiresAtUtc || '').trim(),
       signatureAlgorithm: value?.signatureAlgorithm == null ? null : String(value.signatureAlgorithm).trim(),
       signature: value?.signature == null ? null : String(value.signature).trim()
