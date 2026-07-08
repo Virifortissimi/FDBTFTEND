@@ -94,6 +94,18 @@ export class UserService {
         );
     }
 
+    deleteProfile(): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrl}/profile`).pipe(
+            tap(res => {
+                if (res.success) {
+                    this.profile.set(null);
+                    this.cache.remove(this.profileCacheKey);
+                    this.cache.remove('dashboard.analytics');
+                }
+            })
+        );
+    }
+
     completeOnboarding(data: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/onboarding/complete`, data);
     }

@@ -19,21 +19,25 @@
                 Verifying your payment reference...
             </p>
 
-            <div fbReveal="up" class="pricing-billing-toggle">
+            <div fbReveal="up" class="pricing-billing-control">
+                <div class="pricing-billing-toggle">
                 <button
+                    type="button"
                     (click)="annual=false"
                     class="pricing-billing-toggle__option"
                     [class.is-active]="!annual">
                     Monthly
                 </button>
                 <button
+                    type="button"
                     (click)="annual=true"
                     class="pricing-billing-toggle__option"
                     [class.is-active]="annual">
                     Annual <span class="pricing-billing-toggle__tag">Discount</span>
                 </button>
+                </div>
+                <p class="type-body-s pricing-billing-copy">{{ annualToggleCopy }} · {{ annualDiscountCopy }}</p>
             </div>
-            <p class="type-body-s" style="margin-top: 0.75rem; color: var(--ink-secondary);">{{ annualToggleCopy }} · {{ annualDiscountCopy }}</p>
         </div>
     </section>
 

@@ -1,3 +1,66 @@
+.pricing-billing-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.pricing-billing-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  max-width: 100%;
+  min-height: 3.75rem;
+  padding: 0.375rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+.pricing-billing-toggle__option {
+  min-height: 3rem;
+  padding: 0 1.75rem;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-secondary);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 180ms var(--ease-snap), color 180ms var(--ease-snap);
+}
+
+.pricing-billing-toggle__option.is-active {
+  background: var(--green-500);
+  color: var(--ink-primary);
+  box-shadow: 0 18px 38px rgba(22, 198, 90, 0.25);
+}
+
+.pricing-billing-toggle__tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(16, 24, 40, 0.08);
+  color: inherit;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pricing-billing-copy {
+  margin: 0;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
 .pricing-plan-card {
   position: relative;
   transition: opacity 180ms var(--ease-snap), transform 180ms var(--ease-snap), border-color 180ms var(--ease-snap), box-shadow 180ms var(--ease-snap);
@@ -152,6 +215,27 @@
 }
 
 @media (max-width: 640px) {
+  .pricing-billing-control {
+    margin-top: 1.5rem;
+  }
+
+  .pricing-billing-toggle {
+    width: min(100%, 24rem);
+    min-height: auto;
+    border-radius: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .pricing-billing-toggle__option {
+    flex: 1 1 9rem;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+  }
+
+  .pricing-billing-toggle__tag {
+    margin-left: 0.35rem;
+  }
+
   .pricing-modal-card {
     padding: 1.25rem;
     border-radius: 1.35rem;

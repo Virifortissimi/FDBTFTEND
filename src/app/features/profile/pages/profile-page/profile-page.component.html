@@ -195,6 +195,25 @@
             </div>
         </section>
 
+        <!-- Delete Profile -->
+        <section class="card">
+            <div class="profile-subscription-row">
+                <div>
+                    <h2 class="type-title">Delete Profile</h2>
+                    <p class="type-body-s" style="margin-top: 0.25rem;">
+                        This signs you out and marks your FoodBot account for deletion. Sign in within 30 days to restore it.
+                    </p>
+                </div>
+                <button
+                    type="button"
+                    class="profile-danger-btn"
+                    [disabled]="deletingProfile"
+                    (click)="openDeleteProfileModal()">
+                    Delete Profile
+                </button>
+            </div>
+        </section>
+
         <!-- Badges -->
         <section class="card space-y-5">
             <div class="profile-badges-header">
@@ -299,6 +318,44 @@
                         [disabled]="cancellingSubscription"
                         (click)="cancelSubscription()">
                         {{ cancellingSubscription ? 'Processing...' : 'Cancel Subscription' }}
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div *ngIf="showDeleteProfileModal" class="profile-modal-backdrop" (click)="closeDeleteProfileModal()">
+            <section class="profile-modal" role="dialog" aria-modal="true" aria-labelledby="delete-profile-title" (click)="$event.stopPropagation()">
+                <div class="profile-modal-header">
+                    <div>
+                        <p class="type-overline">Account deletion</p>
+                        <h2 id="delete-profile-title" class="type-title">Delete profile?</h2>
+                    </div>
+                    <button
+                        type="button"
+                        class="profile-modal-close"
+                        aria-label="Close delete profile dialog"
+                        [disabled]="deletingProfile"
+                        (click)="closeDeleteProfileModal()">
+                        x
+                    </button>
+                </div>
+                <p class="type-body-s">
+                    Your account will be soft deleted now. You can restore it by signing in again within 30 days; after that, access remains blocked.
+                </p>
+                <div class="profile-modal-actions">
+                    <button
+                        type="button"
+                        class="btn-outline btn-sm"
+                        [disabled]="deletingProfile"
+                        (click)="closeDeleteProfileModal()">
+                        Keep Profile
+                    </button>
+                    <button
+                        type="button"
+                        class="profile-danger-btn"
+                        [disabled]="deletingProfile"
+                        (click)="deleteProfile()">
+                        {{ deletingProfile ? 'Deleting...' : 'Delete Profile' }}
                     </button>
                 </div>
             </section>

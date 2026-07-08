@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
+import { AuthService } from '../../../../core/services/auth.service';
 import { BadgeProgress, BadgeService } from '../../../../core/services/badge.service';
 import { SubscriptionService } from '../../../../core/services/subscription.service';
 import { ToastService } from '../../../../core/services/toast.service';
@@ -45,6 +46,8 @@ export class ProfilePageComponent implements OnInit {
     saveSuccess = false;
     cancellingSubscription = false;
     showCancelModal = false;
+    deletingProfile = false;
+    showDeleteProfileModal = false;
     selectedBadge: BadgeProgress | null = null;
     private readonly badgeImageByKey: Record<string, string> = {
         first_plate: 'assets/badges/first-plate.svg',
@@ -107,6 +110,8 @@ export class ProfilePageComponent implements OnInit {
 
     constructor(
         private userService: UserService,
+        private authService: AuthService,
+        private router: Router,
         private subscriptionService: SubscriptionService,
         private toastService: ToastService,
         public badgeService: BadgeService
@@ -266,6 +271,48 @@ export class ProfilePageComponent implements OnInit {
                 this.toastService.success(res.data.message || 'Your subscription will end at the end of the current billing period.');
             },
             error: () => this.toastService.error('Unable to cancel the subscription right now.')
+        });
+    }
+
+    openDeleteProfileModal() {
+        if (this.deletingProfile) {
+            return;
+        }
+
+        this.showDeleteProfileModal = true;
+    }
+
+    closeDeleteProfileModal() {
+        if (this.deletingProfile) {
+            return;
+        }
+
+        this.showDeleteProfileModal = false;
+    }
+
+    deleteProfile() {
+        if (this.deletingProfile) {
+            return;
+        }
+
+        this.deletingProfile = true;
+        this.userService.deleteProfile().pipe(
+            finalize(() => {
+                this.deletingProfile = false;
+            })
+        ).subscribe({
+            next: async (res) => {
+                if (!res.success) {
+                    this.toastService.error('Unable to delete your profile right now.');
+                    return;
+                }
+
+                this.showDeleteProfileModal = false;
+                this.toastService.success('Your account has been marked for deletion.');
+                await this.authService.signOut(false);
+                this.router.navigate(['/auth/login']);
+            },
+            error: () => this.toastService.error('Unable to delete your profile right now.')
         });
     }
 
